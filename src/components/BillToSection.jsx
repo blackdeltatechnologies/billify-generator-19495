@@ -11,7 +11,7 @@ const BillToSection = ({ billTo, handleInputChange, selectedCurrency, setSelecte
         <RadioGroup
           value={selectedCurrency}
           onValueChange={setSelectedCurrency}
-          className="flex space-x-4"
+          className="flex flex-wrap gap-4"
         >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="INR" id="inr" />
@@ -20,6 +20,14 @@ const BillToSection = ({ billTo, handleInputChange, selectedCurrency, setSelecte
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="USD" id="usd" />
             <Label htmlFor="usd">USD ($)</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="TSH" id="tsh" />
+            <Label htmlFor="tsh">TSH (TSh)</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="KSH" id="ksh" />
+            <Label htmlFor="ksh">KSH (KSh)</Label>
           </div>
         </RadioGroup>
       </div>
