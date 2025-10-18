@@ -307,49 +307,57 @@ const Index = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 relative">
-      <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
-      <div className="fixed top-4 left-4 flex gap-2">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
+      <div className="container mx-auto px-4 py-8 relative">
+        {/* Header with gradient text */}
+        <div className="text-center mb-12 animate-fade-in">
+          <h1 className="text-5xl font-bold mb-3 gradient-text">Bill Generator</h1>
+          <p className="text-muted-foreground text-lg">Create professional invoices in seconds</p>
+        </div>
+
+        {/* Action buttons with modern styling */}
+        <div className="fixed top-6 left-6 flex gap-3 z-50 animate-slide-in-right">
+          <button
+            onClick={clearForm}
+            className="group bg-destructive hover:bg-destructive/90 text-destructive-foreground p-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105"
+            aria-label="Clear Form"
+          >
+            <FiTrash2 size={20} className="group-hover:rotate-12 transition-transform" />
+          </button>
+          <button
+            onClick={fillDummyData}
+            className="group gradient-primary text-white p-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105"
+            aria-label="Fill with Dummy Data"
+          >
+            <FiEdit size={20} className="group-hover:rotate-12 transition-transform" />
+          </button>
+        </div>
+        
         <button
-          onClick={clearForm}
-          className="bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600"
-          aria-label="Clear Form"
-        >
-          <FiTrash2 size={24} />
-        </button>
-        <button
-          onClick={fillDummyData}
-          className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
-          aria-label="Fill with Dummy Data"
-        >
-          <FiEdit size={24} />
-        </button>
-      </div>
-      <button
-        onClick={() =>
-          navigate("/receipt", {
-            state: {
-              formData: {
-                billTo,
-                shipTo,
-                invoice,
-                yourCompany,
-                items,
-                taxPercentage,
-                notes,
-                selectedCurrency, // Ensure this is passed
+          onClick={() =>
+            navigate("/receipt", {
+              state: {
+                formData: {
+                  billTo,
+                  shipTo,
+                  invoice,
+                  yourCompany,
+                  items,
+                  taxPercentage,
+                  notes,
+                  selectedCurrency,
+                },
               },
-            },
-          })
-        }
-        className="fixed top-4 right-4 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
-        aria-label="Switch to Receipt"
-      >
-        <FiFileText size={24} />
-      </button>
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
-          <form>
+            })
+          }
+          className="group fixed top-6 right-6 z-50 gradient-secondary text-white p-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105 animate-slide-in-right"
+          aria-label="Switch to Receipt"
+        >
+          <FiFileText size={20} className="group-hover:scale-110 transition-transform" />
+        </button>
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="w-full lg:w-1/2 glass-effect p-8 rounded-2xl shadow-card animate-scale-in backdrop-blur-xl">
+            <form>
             <BillToSection
               billTo={billTo}
               handleInputChange={handleInputChange(setBillTo)}
@@ -458,22 +466,23 @@ const Index = () => {
             </div>
 
             <div className="mb-6">
-              <div className="flex items-center mb-2">
-                <h3 className="text-lg font-medium">Notes</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <h3 className="text-lg font-semibold">Notes</h3>
                 <button
                   type="button"
                   onClick={refreshNotes}
-                  className="ml-2 p-1 rounded-full hover:bg-gray-200"
+                  className="group p-2 rounded-lg hover:bg-accent/10 transition-colors"
                   title="Refresh Notes"
                 >
-                  <RefreshCw size={16} />
+                  <RefreshCw size={18} className="text-accent group-hover:rotate-180 transition-transform duration-500" />
                 </button>
               </div>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full p-2 border rounded"
+                className="w-full p-4 border-2 border-input focus:border-primary rounded-xl bg-background/50 focus:bg-background transition-all duration-200 focus:ring-4 focus:ring-primary/10 outline-none resize-none"
                 rows="4"
+                placeholder="Add notes for your invoice..."
               ></textarea>
             </div>
 
@@ -481,28 +490,26 @@ const Index = () => {
           </form>
         </div>
 
-        <div
-          className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto"
-          // style={{ maxHeight: "calc(100vh - 2rem)" }}
-        >
-          <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="w-full lg:w-1/2 glass-effect p-8 rounded-2xl shadow-card animate-scale-in backdrop-blur-xl overflow-y-auto">
+          <h2 className="text-3xl font-bold mb-6 gradient-text">Template Gallery</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {templates.map((template, index) => (
               <div
                 key={index}
-                className="template-card bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                className="group relative bg-card p-5 rounded-xl cursor-pointer shadow-card hover:shadow-elegant transition-all duration-300 hover:scale-105 hover:-translate-y-1 border border-border/50 hover:border-primary/50 overflow-hidden"
                 onClick={() => handleTemplateClick(index + 1)}
               >
-                <img
-                  src={`/assets/template${index + 1}-preview.png`}
-                  alt={template.name}
-                  className={`w-full ${
-                    template.name === "Template 10"
-                      ? "h-[38px] w-[57px]"
-                      : "h-50"
-                  } object-cover rounded mb-2`}
-                />
-                <p className="text-center font-medium">{template.name}</p>
+                <div className="absolute inset-0 gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                <div className="relative">
+                  <div className="bg-muted rounded-lg overflow-hidden mb-4 aspect-[3/4] flex items-center justify-center">
+                    <img
+                      src={`/assets/template${index + 1}-preview.png`}
+                      alt={template.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <p className="text-center font-semibold text-foreground group-hover:text-primary transition-colors">{template.name}</p>
+                </div>
               </div>
             ))}
           </div>

@@ -64,7 +64,7 @@ const ItemDetails = ({ items, handleItemChange, addItem, removeItem, currencyCod
           )}
         </div>
       ))}
-      <Button type="button" onClick={addItem} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Item</Button>
+      <Button type="button" onClick={addItem} className="gradient-primary text-white px-6 py-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold">Add Item</Button>
     </div>
   );
 };
