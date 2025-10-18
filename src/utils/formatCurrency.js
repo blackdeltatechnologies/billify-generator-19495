@@ -1,11 +1,9 @@
-export const formatCurrency = (amount, currencyCode = 'INR', minimumFractionDigits = 2) => {
+export const formatCurrency = (amount, currencyCode = 'TSH', minimumFractionDigits = 2) => {
   const localeMap = {
-    'USD': 'en-US',
-    'INR': 'en-IN',
     'TSH': 'sw-TZ',
     'KSH': 'sw-KE'
   };
-  const locale = localeMap[currencyCode] || 'en-US';
+  const locale = localeMap[currencyCode] || 'sw-TZ';
   return new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode, minimumFractionDigits }).format(amount);
 };
 
