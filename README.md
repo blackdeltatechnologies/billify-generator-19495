@@ -71,29 +71,6 @@ This starts the development server with hot reload.
 
 ---
 
-## Animations and Interactive Enhancements
-
-Billfy Generator supports adding animations and interactive UI improvements. Below are recommended approaches you can use depending on how dynamic you want the UI to be:
-
-- CSS & Tailwind transitions
-  - Use Tailwind's transition utilities for simple fades, slides, and transforms.
-  - Example: add `transition-opacity duration-300 ease-in-out` to elements for smooth fades.
-
-- Framer Motion (React)
-  - Use Framer Motion for declarative, component-level animations (enter/exit transitions, gestures).
-  - Example: wrap invoice cards with <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} />
-
-- Lottie (vector animations)
-  - Use lottie-web or react-lottie for rich, file-size-friendly animations (e.g., success checkmarks).
-  - Example: show a Lottie success animation when an invoice is exported.
-
-- Micro-interactions
-  - Buttons, toasts, and copy-to-clipboard feedback are great places for subtle motion to improve UX.
-
-When adding animations, prefer performance-friendly patterns (hardware-accelerated transforms, limited reflows) so the app stays fast on lower-end devices.
-
----
-
 ## How can I deploy this project?
 
 You can deploy this project to platforms like Netlify, Vercel, or any static-site/CDN host that supports building a Vite app. Typical steps:
