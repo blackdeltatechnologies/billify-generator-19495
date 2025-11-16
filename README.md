@@ -1,54 +1,72 @@
-# Welcome to your GPT Engineer project
+Billfy Generator
 
-## Project info
+A product by BLACK DELTA TECHNOLOGIES
 
-**URL**: https://run.gptengineer.app/projects/1340b42f-5412-43e0-b239-b5fdabd2feb7/improve
+Billfy Generator is a lightweight, fast, and customizable tool for generating receipts, invoices, and bills.
+It supports offline mode, PDF export, and template customization for businesses and developers.
 
-## How can I edit this code?
 
-There are several ways of editing your application.
+---
 
-**Use GPT Engineer**
+Usage (For Users)
 
-Simply visit the GPT Engineer project at [GPT Engineer](https://gptengineer.app/projects/1340b42f-5412-43e0-b239-b5fdabd2feb7/improve) and start prompting.
+🧾 Generate a Bill
 
-Changes made via gptengineer.app will be committed automatically to this repo.
+Create a simple bill/invoice:
 
-**Use your preferred IDE**
+billfy --create --amount 45000 --customer "John Doe"
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in the GPT Engineer UI.
+🖨️ Print the Bill
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+billfy --print
 
-Follow these steps:
+📄 Export as PDF
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+billfy --export pdf
+
+🎨 Customize Branding
+
+Change logo, business name, contacts, and footer from the configuration file:
+
+{
+  "business_name": "Black Delta Technologies",
+  "logo": "assets/logo.png",
+  "contact": "+255-XXX-XXXXXX",
+  "footer_message": "Thank you for your business!"
+}
+
+📑 Choose a Template
+
+Select any design template by editing:
+
+settings/template.json
+
+Example:
+
+{
+  "template": "classic"
+}
+
+
+---
+
+Developer Guide
+
+This section is intended only for developers customizing, extending, or integrating Billfy Generator.
+
+
+---
+
+🔧 Installation (Developer Mode)
+
 git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
-```
 
-**Edit a file directly in GitHub**
+This starts the development server with hot reload.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
 
 ## What technologies are used for this project?
 
