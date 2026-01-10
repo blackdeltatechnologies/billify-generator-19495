@@ -77,7 +77,7 @@ const ReceiptPage = () => {
   const [theme, setTheme] = useState("Receipt1");
   const [notes, setNotes] = useState("");
   const [footer, setFooter] = useState("Thank you");
-  const [selectedCurrency, setSelectedCurrency] = useState("INR");
+  const [selectedCurrency, setSelectedCurrency] = useState("TSH");
 
   const refreshFooter = () => {
     const randomIndex = Math.floor(Math.random() * footerOptions.length);
@@ -97,7 +97,7 @@ const ReceiptPage = () => {
       setTaxPercentage(parsedData.taxPercentage || 0);
       setNotes(parsedData.notes || "");
       setFooter(parsedData.footer || "Thank you");
-      setSelectedCurrency(parsedData.selectedCurrency || "INR");
+      setSelectedCurrency(parsedData.selectedCurrency || "TSH");
     } else {
       // Initialize with default values if nothing in localStorage
       setInvoice((prev) => ({ ...prev, number: generateRandomInvoiceNumber() }));
@@ -191,36 +191,39 @@ const ReceiptPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 relative">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Receipt Generator</h1>
-        <div className="flex items-center">
-          <Button
-            onClick={handleDownloadPDF}
-            disabled={isDownloading}
-            className="mr-4"
-          >
-            {isDownloading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Downloading...
-              </>
-            ) : (
-              "Download Receipt PDF"
-            )}
-          </Button>
-          <button
-            onClick={() => navigate("/")}
-            className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
-            aria-label="Switch to Bill Generator"
-          >
-            <FileText size={24} />
-          </button>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 py-8 animate-fade-in">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold gradient-text">Receipt Generator</h1>
+          <div className="flex items-center gap-4">
+            <Button
+              onClick={handleDownloadPDF}
+              disabled={isDownloading}
+              className="gradient-primary text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-105 transition-all duration-300"
+            >
+              {isDownloading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Downloading...
+                </>
+              ) : (
+                "Download Receipt PDF"
+              )}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => navigate("/")}
+              className="border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+              aria-label="Switch to Bill Generator"
+            >
+              <FileText className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
-      </div>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="w-full md:w-1/2 glass-effect p-6 rounded-xl shadow-card">
           <form>
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
@@ -386,58 +389,28 @@ const ReceiptPage = () => {
           </form>
         </div>
 
-        <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
-          <div className="mb-4 flex items-center">
-            <h3 className="text-lg font-medium mr-4">Receipt Type</h3>
-            <div className="flex gap-4">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt1"
-                  checked={theme === "Receipt1"}
-                  onChange={() => setTheme("Receipt1")}
-                  className="mr-2"
-                />
-                Receipt1
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt2"
-                  checked={theme === "Receipt2"}
-                  onChange={() => setTheme("Receipt2")}
-                  className="mr-2"
-                />
-                Receipt2
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt3"
-                  checked={theme === "Receipt3"}
-                  onChange={() => setTheme("Receipt3")}
-                  className="mr-2"
-                />
-                Receipt3
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt4"
-                  checked={theme === "Receipt4"}
-                  onChange={() => setTheme("Receipt4")}
-                  className="mr-2"
-                />
-                Receipt4
-              </label>
+        <div className="w-full md:w-1/2 glass-effect p-6 rounded-xl shadow-card">
+          <h2 className="text-2xl font-semibold mb-4 text-foreground">Receipt Preview</h2>
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3 text-foreground">Receipt Type</h3>
+            <div className="flex flex-wrap gap-3">
+              {["Receipt1", "Receipt2", "Receipt3", "Receipt4"].map((receiptTheme) => (
+                <button
+                  key={receiptTheme}
+                  type="button"
+                  onClick={() => setTheme(receiptTheme)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    theme === receiptTheme
+                      ? "gradient-primary text-primary-foreground shadow-elegant"
+                      : "bg-muted text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  }`}
+                >
+                  {receiptTheme}
+                </button>
+              ))}
             </div>
           </div>
-          <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
+          <div ref={receiptRef} className="w-[380px] mx-auto bg-card rounded-lg overflow-hidden shadow-lg">
             {theme === "Receipt1" && (
               <Receipt1
                 data={{
@@ -498,6 +471,7 @@ const ReceiptPage = () => {
               />
             )}
           </div>
+        </div>
         </div>
       </div>
     </div>
