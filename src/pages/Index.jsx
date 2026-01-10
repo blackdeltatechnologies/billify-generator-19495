@@ -5,9 +5,10 @@ import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
 import ItemDetails from "../components/ItemDetails";
+import ImageUpload from "../components/ImageUpload";
 import { templates } from "../utils/templateRegistry";
 import { FiEdit, FiFileText, FiTrash2 } from "react-icons/fi"; // Added FiTrash2 icon
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, Image, QrCode } from "lucide-react";
 import { set, sub } from "date-fns";
 
 const generateRandomInvoiceNumber = () => {
@@ -73,6 +74,8 @@ const Index = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
   const [notes, setNotes] = useState("");
+  const [companyLogo, setCompanyLogo] = useState(null);
+  const [qrCode, setQrCode] = useState(null);
 
   const refreshNotes = () => {
     const randomIndex = Math.floor(Math.random() * noteOptions.length);
@@ -95,7 +98,9 @@ const Index = () => {
       setItems(parsedData.items || []);
       settaxPercentage(parsedData.taxPercentage || 0);
       setNotes(parsedData.notes || "");
-      setSelectedCurrency(parsedData.selectedCurrency || "INR"); // Load selectedCurrency from localStorage
+      setSelectedCurrency(parsedData.selectedCurrency || "INR");
+      setCompanyLogo(parsedData.companyLogo || null);
+      setQrCode(parsedData.qrCode || null);
     } else {
       // If no saved data, set invoice number
       setInvoice((prev) => ({
@@ -118,7 +123,9 @@ const Index = () => {
       subTotal,
       grandTotal,
       notes,
-      selectedCurrency, // Add selectedCurrency to localStorage
+      selectedCurrency,
+      companyLogo,
+      qrCode,
     };
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [
@@ -132,7 +139,9 @@ const Index = () => {
     taxAmount,
     subTotal,
     grandTotal,
-    selectedCurrency, // Add selectedCurrency to localStorage dependency array
+    selectedCurrency,
+    companyLogo,
+    qrCode,
   ]);
 
   const handleInputChange = (setter) => (e) => {
@@ -212,7 +221,9 @@ const Index = () => {
       subTotal,
       grandTotal,
       notes,
-      selectedCurrency, // Add this
+      selectedCurrency,
+      companyLogo,
+      qrCode,
     };
     navigate("/template", {
       state: { formData, selectedTemplate: templateNumber },
@@ -303,6 +314,8 @@ const Index = () => {
     setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
     settaxPercentage(0);
     setNotes("");
+    setCompanyLogo(null);
+    setQrCode(null);
     localStorage.removeItem("formData");
   };
 
@@ -427,6 +440,24 @@ const Index = () => {
                 name="address"
                 className="mt-4"
               />
+              
+              {/* Image Uploads for Logo and QR Code */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <ImageUpload
+                  label="Company Logo"
+                  value={companyLogo}
+                  onChange={setCompanyLogo}
+                  placeholder="Upload your logo"
+                  icon={Image}
+                />
+                <ImageUpload
+                  label="Payment QR Code"
+                  value={qrCode}
+                  onChange={setQrCode}
+                  placeholder="Upload QR code"
+                  icon={QrCode}
+                />
+              </div>
             </div>
 
             <ItemDetails
