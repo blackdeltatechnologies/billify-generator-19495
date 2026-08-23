@@ -324,9 +324,10 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8 relative">
         {/* Header with gradient text */}
         <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-5xl font-bold mb-3 gradient-text">Bill Generator</h1>
-          <p className="text-muted-foreground text-lg">Create professional invoices in seconds</p>
+          <h1 className="text-5xl font-bold mb-3 gradient-text">Bill & Receipt Generator</h1>
+          <p className="text-muted-foreground text-lg">Create professional invoices and receipts in seconds</p>
         </div>
+
 
         {/* Action buttons with modern styling */}
         <div className="fixed top-6 left-6 flex gap-3 z-50 animate-slide-in-right">
@@ -363,11 +364,13 @@ const Index = () => {
               },
             })
           }
-          className="group fixed top-6 right-6 z-50 gradient-secondary text-white p-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105 animate-slide-in-right"
-          aria-label="Switch to Receipt"
+          className="group fixed top-6 right-6 z-50 gradient-secondary text-white px-4 py-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105 animate-slide-in-right flex items-center gap-2 font-medium"
+          aria-label="Switch to Receipt Generator"
         >
           <FiFileText size={20} className="group-hover:scale-110 transition-transform" />
+          <span className="hidden sm:inline">Generate Receipt</span>
         </button>
+
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-1/2 glass-effect p-8 rounded-2xl shadow-card animate-scale-in backdrop-blur-xl">
             <form>
