@@ -364,11 +364,13 @@ const Index = () => {
               },
             })
           }
-          className="group fixed top-6 right-6 z-50 gradient-secondary text-white p-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105 animate-slide-in-right"
-          aria-label="Switch to Receipt"
+          className="group fixed top-6 right-6 z-50 gradient-secondary text-white px-4 py-3 rounded-xl shadow-elegant hover:shadow-xl transition-all duration-300 hover:scale-105 animate-slide-in-right flex items-center gap-2 font-medium"
+          aria-label="Switch to Receipt Generator"
         >
           <FiFileText size={20} className="group-hover:scale-110 transition-transform" />
+          <span className="hidden sm:inline">Generate Receipt</span>
         </button>
+
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-1/2 glass-effect p-8 rounded-2xl shadow-card animate-scale-in backdrop-blur-xl">
             <form>
