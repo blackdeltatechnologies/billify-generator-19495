@@ -324,9 +324,10 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8 relative">
         {/* Header with gradient text */}
         <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-5xl font-bold mb-3 gradient-text">Bill Generator</h1>
-          <p className="text-muted-foreground text-lg">Create professional invoices in seconds</p>
+          <h1 className="text-5xl font-bold mb-3 gradient-text">Bill & Receipt Generator</h1>
+          <p className="text-muted-foreground text-lg">Create professional invoices and receipts in seconds</p>
         </div>
+
 
         {/* Action buttons with modern styling */}
         <div className="fixed top-6 left-6 flex gap-3 z-50 animate-slide-in-right">
