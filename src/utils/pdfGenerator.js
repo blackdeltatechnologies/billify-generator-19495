@@ -1,21 +1,20 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import InvoiceTemplate from '../components/InvoiceTemplate';
 
 export const generatePDF = async (invoiceData, templateNumber) => {
   return new Promise(async (resolve, reject) => {
     try {
       const invoice = document.createElement('div');
       document.body.appendChild(invoice);
-      
-      // Render the InvoiceTemplate component to a string
-      const InvoiceTemplate = (await import('../components/InvoiceTemplate')).default;
-      const ReactDOMServer = (await import('react-dom/server')).default;
-      const React = (await import('react')).default;
-      
+
       const invoiceElement = React.createElement(InvoiceTemplate, { data: invoiceData, templateNumber });
       const invoiceHTML = ReactDOMServer.renderToString(invoiceElement);
-      
+
       invoice.innerHTML = invoiceHTML;
+
       invoice.style.width = '210mm';
       invoice.style.height = '297mm';
       
